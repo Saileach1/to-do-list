@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>本周待办事项</title>
+    <link rel="stylesheet" href="./main.css">
+</head>
+<body>
+    <div class="todo-container">
+        <h2 class="todo-title">本周待办事项</h2>
+        <ul class="todo-list" id="todoList">
+            <!-- 初始待办项 -->
+            <li class="todo-item">
+                <span>去图书馆学习</span>
+                <button class="delete-btn">删除</button>
+            </li>
+            <li class="todo-item">
+                <span>上羽毛球课</span>
+                <button class="delete-btn">删除</button>
+            </li>
+            <li class="todo-item">
+                <span>会议室开会</span>
+                <button class="delete-btn">删除</button>
+            </li>
+        </ul>
+        <div class="todo-input-area">
+            <input type="text" class="todo-input" id="todoInput" placeholder="请输入待办事项...">
+            <button class="add-btn" id="addBtn">添加</button>
+        </div>
+        <button class="clear-all-btn" id="clearAllBtn">清空所有</button>
+    </div>
+
+    <script src="./app.js"></script>
+</body>
+</html>
