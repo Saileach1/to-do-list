@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>本周待办事项</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "微软雅黑", sans-serif;
+        }
+        .todo-container {
+            width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+        }
+        .todo-title {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .todo-list {
+            list-style: none;
+        }
+        .todo-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #fff;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+        .delete-btn {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .todo-input-area {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        .todo-input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #007bff;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .add-btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .clear-all-btn {
+            display: block;
+            margin: 15px auto 0;
+            background-color: #343a40;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="todo-container">
+        <h2 class="todo-title">本周待办事项</h2>
+        <ul class="todo-list" id="todoList">
+            <!-- 初始待办项 -->
+            <li class="todo-item">
+                <span>去图书馆学习</span>
+                <button class="delete-btn">删除</button>
+            </li>
+            <li class="todo-item">
+                <span>上羽毛球课</span>
+                <button class="delete-btn">删除</button>
+            </li>
+            <li class="todo-item">
+                <span>会议室开会</span>
+                <button class="delete-btn">删除</button>
+            </li>
+        </ul>
+        <div class="todo-input-area">
+            <input type="text" class="todo-input" id="todoInput" placeholder="请输入待办事项...">
+            <button class="add-btn" id="addBtn">添加</button>
+        </div>
+        <button class="clear-all-btn" id="clearAllBtn">清空所有</button>
+    </div>
+
+    <script>
+        // 获取DOM元素
+        const todoList = document.getElementById('todoList');
+        const todoInput = document.getElementById('todoInput');
+        const addBtn = document.getElementById('addBtn');
+        const clearAllBtn = document.getElementById('clearAllBtn');
+
+        // 添加待办事项
+        addBtn.addEventListener('click', () => {
+            const text = todoInput.value.trim();
+            if (text) {
+                const li = document.createElement('li');
+                li.className = 'todo-item';
+                li.innerHTML = `
+                    <span>${text}</span>
+                    <button class="delete-btn">删除</button>
+                `;
+                todoList.appendChild(li);
+                todoInput.value = ''; // 清空输入框
+                bindDeleteEvent(li.querySelector('.delete-btn')); // 绑定删除事件
+            }
+        });
+
+        // 删除单个待办事项
+        function bindDeleteEvent(btn) {
+            btn.addEventListener('click', () => {
+                btn.parentElement.remove();
+            });
+        }
+
+        // 初始化已有待办项的删除事件
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+            bindDeleteEvent(btn);
+        });
+
+        // 清空所有待办事项
+        clearAllBtn.addEventListener('click', () => {
+            todoList.innerHTML = '';
+        });
+    </script>
+</body>
+</html>
